@@ -1,0 +1,108 @@
+<section class="rudri-login-screen">
+  <div class="login-tablet-frame">
+    <!-- Logo RUDRI idéntico al Figma -->
+    <div class="rudri-logo-center">
+      <svg viewBox="0 0 80 68" width="66" height="56" fill="none" aria-hidden="true">
+        <path
+          d="M20 48V38C13 36.8 7.5 31.2 7.5 24C7.5 16.5 13.8 11 21.2 11C23.5 11 25.6 11.5 27.5 12.5C30.5 7 36.2 3.5 43 3.5C49.8 3.5 55.5 7 58.5 12.5C60.4 11.5 62.5 11 64.8 11C72.2 11 78.5 16.5 78.5 24C78.5 31.2 73 36.8 66 38V48H20Z"
+          stroke="#F08CAE"
+          stroke-width="4.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <rect x="20" y="48" width="46" height="10" rx="4" stroke="#F08CAE" stroke-width="4.5" />
+      </svg>
+      <h1 class="rudri-brand-title">RUDRI</h1>
+    </div>
+
+    <!-- Tarjeta Blanca Redondeada de Login (Figma RUDRI - Acceso - Tablet) -->
+    <div class="login-white-card">
+      @if (mensajeError()) {
+        <div class="login-alert" role="alert" id="login-error-box">
+          {{ mensajeError() }}
+        </div>
+      }
+
+      <form (ngSubmit)="ingresar()" novalidate>
+        <div class="field-block">
+          <div class="field-labels">
+            <label for="input-usuario">Usuario</label>
+            <span class="field-hint">Ingresa tu nombre de usuario</span>
+          </div>
+          <div class="amber-input-pill">
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                <circle cx="12" cy="8" r="4" stroke="#3B2314" stroke-width="2" />
+                <path d="M5 20C5 16.5 8 14 12 14C16 14 19 16.5 19 20" stroke="#3B2314" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input
+              id="input-usuario"
+              name="nombreUsuario"
+              type="text"
+              [(ngModel)]="nombreUsuario"
+              placeholder="Tu usuario"
+              autocomplete="username"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field-block">
+          <div class="field-labels">
+            <label for="input-clave">Contraseña</label>
+            <span class="field-hint">Ingresa tu contraseña</span>
+          </div>
+          <div class="amber-input-pill">
+            <button
+              type="button"
+              class="btn-eye"
+              (click)="alternarVisibilidadClave()"
+              aria-label="Mostrar u ocultar contraseña"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                <path d="M3 3L21 21M10.5 10.6C9.8 11.3 9.8 12.5 10.5 13.3C11.2 14 12.4 14 13.2 13.3" stroke="#3B2314" stroke-width="2" stroke-linecap="round" />
+                <path d="M6.5 6.8C4.4 8.2 2.9 10.2 2 12C3.8 15.8 7.6 18.5 12 18.5C14 18.5 15.8 17.9 17.4 16.9M9.9 5.6C10.6 5.5 11.3 5.5 12 5.5C16.4 5.5 20.2 8.2 22 12C21.3 13.5 20.3 14.8 19.1 15.8" stroke="#3B2314" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </button>
+            <input
+              id="input-clave"
+              name="clave"
+              [type]="mostrarClave() ? 'text' : 'password'"
+              [(ngModel)]="clave"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          id="btn-ingresar"
+          class="btn-pink-ingresar"
+          [disabled]="cargando()"
+        >
+          {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Accesos rápidos de prueba para Mozo / Cocina / CRUD -->
+    <div class="demo-bar">
+      <span class="demo-title">Accesos rápidos:</span>
+      <button type="button" class="demo-chip" (click)="autocompletar('juan', '123456')">
+        Hola, Juan (Mozo)
+      </button>
+      <button type="button" class="demo-chip" (click)="autocompletar('mozo01', 'Mozo12345')">
+        mozo01
+      </button>
+      <button type="button" class="demo-chip" (click)="autocompletar('cocina01', 'Cocina12345')">
+        Cocina KDS
+      </button>
+      <button type="button" class="demo-chip" (click)="autocompletar('admin01', 'Admin12345')">
+        Admin CRUD
+      </button>
+    </div>
+  </div>
+</section>

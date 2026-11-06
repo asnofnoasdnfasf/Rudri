@@ -1,0 +1,71 @@
+<div class="rudri-page">
+  <app-rudri-header />
+
+  <main class="kds-container">
+    <div class="kds-top">
+      <div>
+        <h1>🍲 Monitor de Cocina RUDRI (HU-05 / HU-06)</h1>
+        <p>Recepción de comandas en tiempo real ordenadas por llegada</p>
+      </div>
+      <span class="cola-pill">
+        Pendientes: {{ pedidoService.pedidosPendientesCocina().length }}
+      </span>
+    </div>
+
+    @if (mensajeFeedback()) {
+      <div class="kds-feedback">{{ mensajeFeedback() }}</div>
+    }
+
+    <div class="tickets-grid">
+      @for (ped of pedidoService.pedidosPendientesCocina(); track ped.idPedido) {
+        <article class="ticket-card" [attr.data-estado]="ped.estado">
+          <div class="ticket-head">
+            <div>
+              <span class="mesa-tag">MESA 0{{ ped.numeroMesa }}</span>
+              <h3>Pedido #{{ ped.codigo }}</h3>
+              <small>Mozo: {{ ped.nombreMozo }} • {{ ped.fechaHoraRegistro | date:'shortTime' }}</small>
+            </div>
+            <span class="estado-badge">{{ ped.estado }}</span>
+          </div>
+
+          <ul class="ticket-items">
+            @for (d of ped.detalles; track d.producto.idProducto) {
+              <li>
+                <strong>{{ d.cantidad }}x</strong> {{ d.producto.nombre }}
+              </li>
+            }
+          </ul>
+
+          @if (ped.observacionGeneral) {
+            <p class="ticket-obs">💬 {{ ped.observacionGeneral }}</p>
+          }
+
+          <div class="ticket-actions">
+            @if (ped.estado === 'ENVIADO') {
+              <button
+                type="button"
+                class="btn-prep"
+                (click)="cambiarEstado(ped.idPedido, 'EN_PREPARACION')"
+              >
+                🔥 Iniciar Preparación
+              </button>
+            } @else if (ped.estado === 'EN_PREPARACION') {
+              <button
+                type="button"
+                class="btn-despachar"
+                (click)="cambiarEstado(ped.idPedido, 'DESPACHADO')"
+              >
+                ✅ Marcar como Despachado
+              </button>
+            }
+          </div>
+        </article>
+      } @empty {
+        <div class="empty-cocina">
+          <h3>✨ No hay pedidos pendientes en cocina</h3>
+          <p>Los nuevos pedidos enviados desde las tablets aparecerán aquí automáticamente.</p>
+        </div>
+      }
+    </div>
+  </main>
+</div>

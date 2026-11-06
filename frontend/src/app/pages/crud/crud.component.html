@@ -1,0 +1,224 @@
+<div class="rudri-page">
+  <app-rudri-header />
+
+  <main class="crud-wrapper">
+    <div class="crud-top">
+      <div>
+        <h1>⚙️ Administración y CRUD RUDRI</h1>
+        <p>Gestión de Platos de la Carta, Mesas y Pedidos conectados a Services</p>
+      </div>
+
+      <div class="crud-tabs">
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="tabActiva() === 'productos'"
+          (click)="tabActiva.set('productos')"
+        >
+          🍽️ Productos ({{ productoService.productos().length }})
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="tabActiva() === 'mesas'"
+          (click)="tabActiva.set('mesas')"
+        >
+          🪑 Mesas ({{ mesaService.mesas().length }})
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="tabActiva() === 'pedidos'"
+          (click)="tabActiva.set('pedidos')"
+        >
+          🧾 Pedidos ({{ pedidoService.pedidos().length }})
+        </button>
+      </div>
+    </div>
+
+    @if (mensaje()) {
+      <div class="crud-toast">{{ mensaje() }}</div>
+    }
+
+    <!-- CRUD PRODUCTOS -->
+    @if (tabActiva() === 'productos') {
+      <div class="crud-grid">
+        <section class="crud-card">
+          <h3>{{ formProducto.idProducto ? '✏️ Editar Plato' : '➕ Nuevo Plato / Bebida' }}</h3>
+          <form (ngSubmit)="guardarProducto()">
+            <label>Nombre del Plato *</label>
+            <input type="text" name="nombre" [(ngModel)]="formProducto.nombre" placeholder="Ej. CEVICHE MIXTO" required />
+
+            <label>Categoría *</label>
+            <select name="idCategoria" [(ngModel)]="formProducto.idCategoria">
+              @for (c of categoriaService.categorias(); track c.idCategoria) {
+                <option [ngValue]="c.idCategoria">{{ c.nombre }}</option>
+              }
+            </select>
+
+            <label>Subcategoría (Filtro)</label>
+            <input type="text" name="subcategoria" [(ngModel)]="formProducto.subcategoria" placeholder="Ej. Mariscos" />
+
+            <label>Precio (S/) *</label>
+            <input type="number" step="0.50" name="precio" [(ngModel)]="formProducto.precio" required />
+
+            <label>URL de Imagen</label>
+            <input type="url" name="imagenUrl" [(ngModel)]="formProducto.imagenUrl" />
+
+            <label class="chk-row">
+              <input type="checkbox" name="disponible" [(ngModel)]="formProducto.disponible" />
+              <span>Disponible en la carta</span>
+            </label>
+
+            <div class="btn-row">
+              <button type="submit" class="btn-pink">
+                {{ formProducto.idProducto ? 'Actualizar' : 'Guardar Plato' }}
+              </button>
+              @if (formProducto.idProducto) {
+                <button type="button" class="btn-ghost" (click)="limpiarFormProducto()">Cancelar</button>
+              }
+            </div>
+          </form>
+        </section>
+
+        <section class="crud-card">
+          <h3>📖 Catálogo Actual</h3>
+          <div class="table-scroll">
+            <table class="rudri-table">
+              <thead>
+                <tr>
+                  <th>Plato</th>
+                  <th>Subcat.</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (p of productoService.productos(); track p.idProducto) {
+                  <tr>
+                    <td><strong>{{ p.nombre }}</strong></td>
+                    <td>{{ p.subcategoria || 'General' }}</td>
+                    <td>S/ {{ p.precio.toFixed(2) }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="pill-toggle"
+                        [class.ok]="p.disponible"
+                        (click)="alternarDisponibilidad(p)"
+                      >
+                        {{ p.disponible ? 'Disponible' : 'Agotado' }}
+                      </button>
+                    </td>
+                    <td class="actions-cell">
+                      <button type="button" class="btn-sm" (click)="editarProducto(p)">Editar</button>
+                      <button type="button" class="btn-sm danger" (click)="eliminarProducto(p.idProducto)">Eliminar</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    }
+
+    <!-- CRUD MESAS -->
+    @if (tabActiva() === 'mesas') {
+      <div class="crud-grid">
+        <section class="crud-card">
+          <h3>{{ formMesa.idMesa ? '✏️ Editar Mesa' : '➕ Nueva Mesa' }}</h3>
+          <form (ngSubmit)="guardarMesa()">
+            <label>Número de Mesa *</label>
+            <input type="number" min="1" name="numero" [(ngModel)]="formMesa.numero" required />
+
+            <label>Capacidad (Sillas) *</label>
+            <input type="number" min="1" max="20" name="capacidad" [(ngModel)]="formMesa.capacidad" required />
+
+            <label class="chk-row">
+              <input type="checkbox" name="activa" [(ngModel)]="formMesa.activa" />
+              <span>Mesa Habilitada</span>
+            </label>
+
+            <div class="btn-row">
+              <button type="submit" class="btn-pink">
+                {{ formMesa.idMesa ? 'Actualizar Mesa' : 'Crear Mesa' }}
+              </button>
+              @if (formMesa.idMesa) {
+                <button type="button" class="btn-ghost" (click)="limpiarFormMesa()">Cancelar</button>
+              }
+            </div>
+          </form>
+        </section>
+
+        <section class="crud-card">
+          <h3>🪑 Mesas Registradas</h3>
+          <table class="rudri-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Capacidad</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (m of mesaService.mesas(); track m.idMesa) {
+                <tr>
+                  <td><strong>{{ m.codigoFormateado || ('MESA 0' + m.numero) }}</strong></td>
+                  <td>{{ m.capacidad }} personas</td>
+                  <td>{{ m.activa ? 'Activa' : 'Inactiva' }}</td>
+                  <td class="actions-cell">
+                    <button type="button" class="btn-sm" (click)="editarMesa(m)">Editar</button>
+                    <button type="button" class="btn-sm danger" (click)="eliminarMesa(m.idMesa)">Eliminar</button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+      </div>
+    }
+
+    <!-- CRUD PEDIDOS -->
+    @if (tabActiva() === 'pedidos') {
+      <section class="crud-card">
+        <h3>🧾 Historial de Pedidos</h3>
+        <table class="rudri-table">
+          <thead>
+            <tr>
+              <th>Pedido</th>
+              <th>Mesa</th>
+              <th>Mozo</th>
+              <th>Artículos</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (ped of pedidoService.pedidos(); track ped.idPedido) {
+              <tr>
+                <td><strong>#{{ ped.codigo }}</strong></td>
+                <td>MESA 0{{ ped.numeroMesa }}</td>
+                <td>{{ ped.nombreMozo }}</td>
+                <td>{{ ped.totalArticulos }} art.</td>
+                <td>S/ {{ ped.totalMonto.toFixed(2) }}</td>
+                <td><strong>{{ ped.estado }}</strong></td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn-sm danger"
+                    (click)="pedidoService.eliminarPedido(ped.idPedido)"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </section>
+    }
+  </main>
+</div>

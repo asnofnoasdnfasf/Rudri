@@ -1,0 +1,175 @@
+.rudri-login-screen {
+  min-height: 100vh;
+  background: #f9edc8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+.login-tablet-frame {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.rudri-logo-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.rudri-brand-title {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #6e3517;
+  letter-spacing: 0.04em;
+}
+
+.login-white-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 1.85rem 1.65rem;
+  box-shadow: 0 14px 32px rgba(110, 53, 23, 0.12);
+}
+
+.login-alert {
+  background: #fff1f2;
+  color: #be123c;
+  border: 1.5px solid #fda4af;
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.field-block {
+  margin-bottom: 1.15rem;
+}
+
+.field-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+  padding: 0 0.25rem;
+}
+
+.field-labels label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #3b2314;
+}
+
+.field-hint {
+  font-size: 0.68rem;
+  color: #a8998c;
+}
+
+.amber-input-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #f9c86b;
+  border-radius: 999px;
+  padding: 0.62rem 1rem;
+  border: 2px solid transparent;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.amber-input-pill:focus-within {
+  border-color: #6e3517;
+  box-shadow: 0 0 0 3px rgba(249, 200, 107, 0.45);
+}
+
+.input-icon,
+.btn-eye {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #3b2314;
+}
+
+.btn-eye {
+  cursor: pointer;
+}
+
+.amber-input-pill input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2b1810;
+  outline: none;
+}
+
+.amber-input-pill input::placeholder {
+  color: rgba(59, 35, 20, 0.55);
+}
+
+.btn-pink-ingresar {
+  width: 100%;
+  margin-top: 0.35rem;
+  background: #f29bb8;
+  color: #3b1c0e;
+  border: none;
+  border-radius: 999px;
+  padding: 0.78rem 1.25rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(242, 155, 184, 0.45);
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.btn-pink-ingresar:hover:not(:disabled) {
+  background: #ea85a7;
+  transform: translateY(-1px);
+}
+
+.btn-pink-ingresar:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.demo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.demo-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #6e3517;
+}
+
+.demo-chip {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid #d8bf8c;
+  color: #6e3517;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.demo-chip:hover {
+  background: #ffffff;
+  border-color: #f29bb8;
+}

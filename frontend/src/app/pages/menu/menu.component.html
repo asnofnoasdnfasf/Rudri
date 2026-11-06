@@ -1,0 +1,73 @@
+<div class="rudri-page">
+  <app-rudri-header />
+
+  <main class="tablet-container">
+    <!-- Barra de Categorías (COMIDA, BEBIDAS, POSTRES) idéntica al Figma -->
+    <app-categoria-bar
+      [categorias]="categoriaService.categorias()"
+      [idCategoriaActiva]="idCategoriaActiva()"
+      (cambiarCategoria)="cambiarCategoria($event)"
+    />
+
+    <!-- Barra de Filtro (Figma: "Mariscos: ▽ barra de filtro") -->
+    <div class="filter-bar-row">
+      <div class="filter-select-group">
+        <select
+          class="subcat-select"
+          [ngModel]="subcategoriaActiva()"
+          (ngModelChange)="subcategoriaActiva.set($event)"
+          aria-label="Filtrar por subcategoría"
+        >
+          @for (sub of subcategoriasDisponibles(); track sub) {
+            <option [value]="sub">{{ sub }}:</option>
+          }
+        </select>
+        <span class="funnel-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path d="M3 5H21L14 13V19L10 21V13L3 5Z" stroke="#3B2314" stroke-width="2" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </div>
+
+      <input
+        type="search"
+        class="search-filter-input"
+        [ngModel]="textoBusqueda()"
+        (ngModelChange)="textoBusqueda.set($event)"
+        placeholder="barra de filtro (buscar plato...)"
+      />
+    </div>
+
+    @if (mensajeAviso()) {
+      <div class="aviso-box" role="alert">{{ mensajeAviso() }}</div>
+    }
+
+    <!-- Lista de Platos con Imagen y Stepper -->
+    <section class="platos-list">
+      @for (prod of productosFiltrados(); track prod.idProducto) {
+        <app-producto-item
+          [producto]="prod"
+          [cantidadActual]="pedidoService.obtenerCantidadProductoEnCarrito(prod.idProducto)"
+          (cambiarCantidad)="actualizarCantidad($event)"
+        />
+      } @empty {
+        <p class="empty-filter">No se encontraron platos con ese filtro.</p>
+      }
+    </section>
+
+    <!-- Botón Rosa Inferior "Continuar" (Figma Examples/Menus) -->
+    <div class="footer-continue">
+      <button
+        type="button"
+        id="btn-continuar-pedido"
+        class="btn-pink-continuar"
+        (click)="irAConfirmacion()"
+      >
+        Continuar
+        @if (pedidoService.totalArticulosCarrito() > 0) {
+          <span>({{ pedidoService.totalArticulosCarrito() }} art. • S/ {{ pedidoService.totalMontoCarrito().toFixed(2) }})</span>
+        }
+      </button>
+    </div>
+  </main>
+</div>

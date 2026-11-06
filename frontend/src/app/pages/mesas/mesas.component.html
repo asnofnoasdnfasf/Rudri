@@ -1,0 +1,17 @@
+<div class="rudri-page">
+  <app-rudri-header />
+
+  <main class="tablet-container">
+    <h1 class="section-heading">Seleccionar una Mesa</h1>
+
+    <div class="mesas-grid">
+      @for (mesa of mesaService.mesas(); track mesa.idMesa) {
+        <app-mesa-card
+          [mesa]="mesa"
+          [seleccionada]="pedidoService.mesaSeleccionada()?.idMesa === mesa.idMesa"
+          (seleccionar)="elegirMesa($event)"
+        />
+      }
+    </div>
+  </main>
+</div>

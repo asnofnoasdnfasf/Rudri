@@ -1,0 +1,44 @@
+.mesa-tile {
+  width: 100%;
+  background: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 1.15rem 0.75rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(110, 53, 23, 0.06);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.mesa-tile:hover:not(:disabled) {
+  transform: translateY(-3px);
+  border-color: #f29bb8;
+  box-shadow: 0 10px 20px rgba(242, 155, 184, 0.25);
+}
+
+.mesa-tile.seleccionada {
+  border-color: #e67399;
+  background: #fff5f8;
+  box-shadow: 0 8px 20px rgba(230, 115, 153, 0.28);
+}
+
+.mesa-tile.inactiva {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.mesa-label {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #6e3517;
+  letter-spacing: 0.03em;
+}
+
+.mesa-cap {
+  font-size: 0.74rem;
+  color: #9c7a5b;
+}

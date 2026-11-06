@@ -1,0 +1,161 @@
+.rudri-page {
+  min-height: 100vh;
+  background: #f9edc8;
+}
+
+.kds-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.kds-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.kds-top h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #6e3517;
+}
+
+.kds-top p {
+  margin: 0.2rem 0 0;
+  color: #7c5e44;
+  font-size: 0.88rem;
+}
+
+.cola-pill {
+  background: #6e3517;
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+}
+
+.kds-feedback {
+  background: #ffffff;
+  border-left: 5px solid #f29bb8;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #3b2314;
+  margin-bottom: 1rem;
+}
+
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.1rem;
+}
+
+.ticket-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.15rem;
+  box-shadow: 0 8px 20px rgba(110, 53, 23, 0.08);
+  border: 2px solid #edd69c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ticket-card[data-estado='EN_PREPARACION'] {
+  border-color: #fb923c;
+  background: #fffcf7;
+}
+
+.ticket-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #f1e4c3;
+  padding-bottom: 0.65rem;
+}
+
+.mesa-tag {
+  background: #f9c86b;
+  color: #3b2314;
+  font-size: 0.74rem;
+  font-weight: 900;
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+}
+
+.ticket-head h3 {
+  margin: 0.3rem 0 0.1rem;
+  font-size: 1.05rem;
+  color: #2b1810;
+}
+
+.ticket-head small {
+  color: #8c735b;
+  font-size: 0.76rem;
+}
+
+.estado-badge {
+  background: #fce7f3;
+  color: #9d174d;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+}
+
+.ticket-items {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0;
+}
+
+.ticket-items li {
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed #e6d2a4;
+  font-size: 0.9rem;
+  color: #2b1810;
+}
+
+.ticket-obs {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin: 0 0 0.85rem;
+}
+
+.btn-prep,
+.btn-despachar {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem;
+  font-weight: 800;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.btn-prep {
+  background: #f9c86b;
+  color: #3b2314;
+}
+
+.btn-despachar {
+  background: #f29bb8;
+  color: #2b1208;
+}
+
+.empty-cocina {
+  grid-column: 1 / -1;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  color: #6e3517;
+}

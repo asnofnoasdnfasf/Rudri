@@ -1,0 +1,62 @@
+[
+  {
+    "idProducto": 1,
+    "idCategoria": 1,
+    "nombre": "CEVICHE CLÁSICO DRAGÓN MARINO",
+    "subcategoria": "Mariscos",
+    "descripcion": "Pesca fresca del día al limón sutil con choclo tierno y camote glaseado.",
+    "precio": 28.0,
+    "disponible": true,
+    "imagenUrl": "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "idProducto": 2,
+    "idCategoria": 1,
+    "nombre": "ARROZ CHAUFA DE MARISCOS",
+    "subcategoria": "Mariscos",
+    "descripcion": "Arroz al wok salteado con langostinos, calamar, pulpo y salsa oriental.",
+    "precio": 18.0,
+    "disponible": true,
+    "imagenUrl": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "idProducto": 3,
+    "idCategoria": 1,
+    "nombre": "SOPA CRIOLLA ESPECIAL",
+    "subcategoria": "Sopas",
+    "descripcion": "Concentrado tradicional con cabello de ángel, leche y huevo escalfado.",
+    "precio": 22.0,
+    "disponible": false,
+    "imagenUrl": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "idProducto": 4,
+    "idCategoria": 1,
+    "nombre": "JALEA MIXTA REAL",
+    "subcategoria": "Mariscos",
+    "descripcion": "Chicharrón crocante de pescado y mariscos con yucas doradas y zarza criolla.",
+    "precio": 42.0,
+    "disponible": true,
+    "imagenUrl": "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "idProducto": 5,
+    "idCategoria": 2,
+    "nombre": "CHICHA MORADA (JARRA 1L)",
+    "subcategoria": "Jarras",
+    "descripcion": "Chicha natural de maíz morado hervida con piña, membrillo y canela.",
+    "precio": 12.0,
+    "disponible": true,
+    "imagenUrl": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "idProducto": 6,
+    "idCategoria": 3,
+    "nombre": "PICARONES CON MIEL",
+    "subcategoria": "Tradicionales",
+    "descripcion": "Aros crocantes de zapallo y camote bañados en miel artesanal.",
+    "precio": 15.0,
+    "disponible": true,
+    "imagenUrl": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80"
+  }
+]

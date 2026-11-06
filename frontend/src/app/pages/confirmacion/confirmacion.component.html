@@ -1,0 +1,110 @@
+<div class="rudri-page">
+  <app-rudri-header />
+
+  <main class="tablet-container">
+    <div class="confirm-header">
+      <h1 class="confirm-title">Confirmación de Pedido</h1>
+      <p class="confirm-subtitle">Revisa el pedido antes de enviarlo</p>
+    </div>
+
+    @if (mensajeExito()) {
+      <div class="banner-ok" role="status" id="confirm-success-msg">
+        <span>✅ {{ mensajeExito() }}</span>
+        <a routerLink="/mesas" class="link-volver">Tomar nuevo pedido →</a>
+      </div>
+    }
+
+    @if (mensajeError()) {
+      <div class="banner-err" role="alert">
+        ⚠️ {{ mensajeError() }}
+      </div>
+    }
+
+    @if (pedidoService.itemsEnCarrito().length === 0) {
+      <div class="empty-confirm">
+        <p>No hay artículos pendientes en la comanda actual.</p>
+        <a routerLink="/menu" class="btn-outline-pink">← Volver a la Carta</a>
+      </div>
+    } @else {
+      <!-- Lista de Artículos (Idéntica al Figma RUDRI - Confirmación de pedido - Tablet) -->
+      <div class="confirm-items-list">
+        @for (item of pedidoService.itemsEnCarrito(); track item.producto.idProducto) {
+          <article class="confirm-row">
+            <img
+              [src]="item.producto.imagenUrl"
+              [alt]="item.producto.nombre"
+              class="confirm-img"
+            />
+
+            <div class="confirm-body">
+              <div class="confirm-name-row">
+                <h3 class="confirm-dish-name">{{ item.producto.nombre }}</h3>
+                <span class="confirm-unit-price">S/ {{ item.subtotal.toFixed(2) }}</span>
+              </div>
+
+              <div class="confirm-cant-row">
+                <span class="cant-label">Cant:</span>
+                <app-cantidad-stepper
+                  [cantidad]="item.cantidad"
+                  [min]="0"
+                  [max]="20"
+                  variante="solido"
+                  (cambioCantidad)="cambiarCantidad(item.producto, $event)"
+                />
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+
+      <!-- Observaciones opcionales (HU-03 máx. 200 caracteres) -->
+      <div class="obs-section">
+        <label for="txt-obs">Observación para cocina (opcional, máx. 200 caracteres):</label>
+        <input
+          id="txt-obs"
+          type="text"
+          maxlength="200"
+          [ngModel]="pedidoService.observacionGeneral()"
+          (ngModelChange)="actualizarObservacion($event)"
+          placeholder="Ej. Sin picante, servir con ají aparte..."
+        />
+      </div>
+
+      <!-- Resumen Total: X artículos (Figma) -->
+      <div class="totals-summary">
+        <span class="total-articulos">Total: {{ pedidoService.totalArticulosCarrito() }} artículos</span>
+        <span class="total-monto">Importe: S/ {{ pedidoService.totalMontoCarrito().toFixed(2) }}</span>
+      </div>
+
+      <!-- Botón Rosa Ancho "Enviar pedido →" (Figma) -->
+      <button
+        type="button"
+        id="btn-enviar-pedido"
+        class="btn-enviar-pedido"
+        (click)="enviarPedido()"
+      >
+        <span></span>
+        <span>Enviar pedido</span>
+        <span class="arrow-right">→</span>
+      </button>
+    }
+
+    <!-- Seguimiento de Pedidos Enviados (HU-07) -->
+    <section class="historial-reciente">
+      <h2>📡 Estado de Pedidos Enviados a Cocina</h2>
+      <div class="pedidos-mini-list">
+        @for (ped of pedidoService.pedidos(); track ped.idPedido) {
+          <div class="pedido-mini-card">
+            <div>
+              <strong>Pedido #{{ ped.codigo }} • MESA 0{{ ped.numeroMesa }}</strong>
+              <small>{{ ped.totalArticulos }} art. • S/ {{ ped.totalMonto.toFixed(2) }}</small>
+            </div>
+            <span class="estado-chip" [attr.data-estado]="ped.estado">
+              {{ ped.estado }}
+            </span>
+          </div>
+        }
+      </div>
+    </section>
+  </main>
+</div>

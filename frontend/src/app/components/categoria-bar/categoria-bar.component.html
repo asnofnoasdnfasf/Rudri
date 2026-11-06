@@ -1,0 +1,50 @@
+<div class="categorias-carousel">
+  <div class="categorias-row">
+    @for (cat of categorias; track cat.idCategoria) {
+      <button
+        type="button"
+        class="cat-card"
+        [class.activa]="idCategoriaActiva === cat.idCategoria"
+        (click)="seleccionar(cat.idCategoria)"
+      >
+        <div class="cat-icon-box">
+          @if (cat.icono === 'comida') {
+            <!-- Ícono Tenedor y Cuchillo en círculo negro como en el Figma -->
+            <svg viewBox="0 0 64 64" width="52" height="52">
+              <circle cx="32" cy="32" r="28" fill="#111111" />
+              <path d="M23 16V30M20 16V25C20 27.5 26 27.5 26 25V16M23 30V48" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" />
+              <path d="M41 16C37.5 19 37.5 28 41 31V48M41 16V31" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" />
+            </svg>
+          } @else if (cat.icono === 'bebidas') {
+            <!-- Ícono Copa / Bebida Tropical con rodaja de naranja como en el Figma -->
+            <svg viewBox="0 0 64 64" width="52" height="52">
+              <rect x="6" y="6" width="52" height="52" rx="14" fill="#FFFFFF" />
+              <circle cx="43" cy="21" r="8" fill="#FB923C" stroke="#1E293B" stroke-width="2.2" />
+              <path d="M22 22H40L37 44C36.5 48 33.5 50 31 50C28.5 50 25.5 48 25 44L22 22Z" fill="#7DD3FC" stroke="#1E293B" stroke-width="2.4" />
+              <path d="M23 28C27 30 35 26 39 28" stroke="#FDE047" stroke-width="3" />
+              <path d="M18 14L25 18L28 36" stroke="#1E293B" stroke-width="2.4" stroke-linecap="round" fill="none" />
+            </svg>
+          } @else {
+            <!-- Ícono Cupcake / Postres como en el Figma -->
+            <svg viewBox="0 0 64 64" width="52" height="52">
+              <rect x="6" y="6" width="52" height="52" rx="14" fill="#FFFFFF" />
+              <path d="M20 34L24 50H40L44 34H20Z" fill="#FDE68A" stroke="#111111" stroke-width="2.8" stroke-linejoin="round" />
+              <path d="M18 34C15 34 14 29 18 27C18 22 24 19 29 20C32 16 39 17 41 21C46 21 49 26 46 30C49 32 47 34 44 34H18Z" fill="#F9A8D4" stroke="#111111" stroke-width="2.8" />
+              <path d="M38 14L46 22" stroke="#111111" stroke-width="3" stroke-linecap="round" />
+            </svg>
+          }
+        </div>
+        <span class="cat-title">{{ cat.nombre }}</span>
+      </button>
+    }
+  </div>
+
+  <button
+    type="button"
+    class="btn-next-cat"
+    (click)="siguienteCategoria()"
+    aria-label="Siguiente categoría"
+  >
+    →
+  </button>
+</div>

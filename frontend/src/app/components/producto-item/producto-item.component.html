@@ -1,0 +1,39 @@
+<article class="plato-row" [class.agotado]="!producto.disponible">
+  <img
+    [src]="producto.imagenUrl"
+    [alt]="producto.nombre"
+    class="plato-img"
+    loading="lazy"
+  />
+
+  <div class="plato-info">
+    <div class="plato-top">
+      <h4 class="plato-title">{{ producto.nombre }}</h4>
+      <span class="plato-precio">S/ {{ producto.precio.toFixed(2) }}</span>
+    </div>
+
+    @if (producto.descripcion) {
+      <p class="plato-desc">{{ producto.descripcion }}</p>
+    }
+
+    <div class="plato-bottom">
+      @if (producto.disponible) {
+        <app-cantidad-stepper
+          [cantidad]="cantidadActual"
+          [min]="0"
+          [max]="20"
+          variante="suave"
+          (cambioCantidad)="alCambiar($event)"
+        />
+      } @else {
+        <span class="badge-no-disponible">No disponible</span>
+      }
+
+      @if (cantidadActual > 0) {
+        <span class="subtotal-chip">
+          Subtotal: S/ {{ (cantidadActual * producto.precio).toFixed(2) }}
+        </span>
+      }
+    </div>
+  </div>
+</article>

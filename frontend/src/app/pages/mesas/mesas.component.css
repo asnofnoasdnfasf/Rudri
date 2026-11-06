@@ -1,0 +1,29 @@
+.rudri-page {
+  min-height: 100vh;
+  background: #f9edc8;
+}
+
+.tablet-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.section-heading {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #6e3517;
+}
+
+.mesas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 520px) {
+  .mesas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

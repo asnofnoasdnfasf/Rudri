@@ -1,0 +1,45 @@
+<header class="rudri-topbar">
+  <div class="brand-group" routerLink="/mesas">
+    <div class="logo-hat" aria-hidden="true">
+      <svg viewBox="0 0 64 56" width="38" height="34" fill="none">
+        <path
+          d="M16 40V32C10.5 31 6 26.5 6 20.5C6 14.5 11 10 17 10C18.8 10 20.5 10.4 22 11.2C24.4 6.8 29 4 34.5 4C40 4 44.6 6.8 47 11.2C48.5 10.4 50.2 10 52 10C58 10 63 14.5 63 20.5C63 26.5 58.5 31 53 32V40H16Z"
+          stroke="#F08CAE"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <rect x="16" y="40" width="37" height="8" rx="3" stroke="#F08CAE" stroke-width="4" />
+      </svg>
+    </div>
+    <span class="brand-text">RUDRI</span>
+  </div>
+
+  <div class="greeting-text">
+    Hola, <strong>{{ authService.nombreCorto() }}</strong>
+    @if (pedidoService.mesaSeleccionada(); as mesa) {
+      <span class="mesa-activa-pill">
+        {{ mesa.codigoFormateado || ('MESA 0' + mesa.numero) }}
+      </span>
+    }
+  </div>
+
+  <nav class="rudri-nav" aria-label="Navegación RUDRI">
+    <a routerLink="/mesas" routerLinkActive="active" class="nav-pill">🪑 Mesas</a>
+    <a routerLink="/menu" routerLinkActive="active" class="nav-pill">🍽️ Carta</a>
+    <a routerLink="/confirmacion" routerLinkActive="active" class="nav-pill">
+      🧾 Pedido
+      @if (pedidoService.totalArticulosCarrito() > 0) {
+        <span class="badge-count">{{ pedidoService.totalArticulosCarrito() }}</span>
+      }
+    </a>
+    <a routerLink="/cocina" routerLinkActive="active" class="nav-pill">
+      🍲 Cocina
+      @if (pedidoService.pedidosPendientesCocina().length > 0) {
+        <span class="badge-count">{{ pedidoService.pedidosPendientesCocina().length }}</span>
+      }
+    </a>
+    <a routerLink="/crud" routerLinkActive="active" class="nav-pill">⚙️ CRUD</a>
+    <button type="button" class="btn-salir" (click)="cerrarSesion()">Salir</button>
+  </nav>
+</header>

@@ -1,0 +1,25 @@
+<div
+  class="stepper-pill"
+  [class.solido]="variante === 'solido'"
+  [class.disabled]="deshabilitado"
+>
+  <button
+    type="button"
+    class="step-btn"
+    [disabled]="deshabilitado || cantidad <= min"
+    (click)="disminuir()"
+    aria-label="Disminuir cantidad"
+  >
+    −
+  </button>
+  <span class="step-value">{{ cantidad }}</span>
+  <button
+    type="button"
+    class="step-btn"
+    [disabled]="deshabilitado || cantidad >= max"
+    (click)="aumentar()"
+    aria-label="Aumentar cantidad"
+  >
+    +
+  </button>
+</div>
